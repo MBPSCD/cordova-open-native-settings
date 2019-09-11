@@ -11,8 +11,8 @@
 		<engine name="cordova" version=">=4.0.0" />
 	</engines>
 
-	<js-module src="www/settings.js" name="Settings">
-		<clobbers target="cordova.plugins.settings" />
+	<js-module src="www/settings.js">
+		<clobbers target="cordova.settings" />
 	</js-module>
 
 	<!-- android -->

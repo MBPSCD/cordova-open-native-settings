@@ -1,9 +1,25 @@
-var NativeSettings = function() {
+'use strict';
+
+var NativeSettings = function () {
 };
 
-NativeSettings.open = function(setting, onsucess, onfail) {
-	var settings = (typeof setting === 'string' || setting instanceof String) ? [setting] : setting;
-	cordova.exec(onsucess, onfail, "NativeSettings", "open", settings);
+NativeSettings.open = function (success, fail) {
+    return getPromisedCordovaExec('open', success, fail);
 };
+
+function getPromisedCordovaExec(command, success, fail) {
+    var result = null;
+
+    if (!success) {
+        result = new Promise(function (resolve, reject) {
+            success = resolve;
+            fail = reject;
+        });
+    }
+
+    cordova.exec(success, fail, 'NativeSettings', command);
+
+    return result;
+}
 
 module.exports = NativeSettings;
